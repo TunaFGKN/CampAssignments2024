@@ -3,6 +3,8 @@ using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 
 CourseManager courseManager = new CourseManager(new InMemoryCourseDal());
+CategoryManager categoryManager = new CategoryManager(new InMemoryCategoryDal());
+InstructorManager instructorManager = new InstructorManager(new InMemoryInstructorDal());
 
 foreach(var course in courseManager.GetAll())
 {
@@ -41,3 +43,15 @@ foreach (var course in courseManager.GetAll())
 }
 
 Console.WriteLine("--------------------------------------------------------------");
+
+foreach (var category in categoryManager.GetAll())
+{
+    Console.WriteLine(category.CategoryName);
+}
+
+Console.WriteLine("--------------------------------------------------------------");
+
+foreach (var instructor in instructorManager.GetAll())
+{
+    Console.WriteLine(instructor.InstructorName);
+}
