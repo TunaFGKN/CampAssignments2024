@@ -10,29 +10,46 @@ namespace DataAccess.Concrete.InMemory
 {
     public class InMemoryCategoryDal : ICategoryDal
     {
+        List<Category> _categories;
+        public InMemoryCategoryDal()
+        {
+            _categories = new List<Category> 
+            {
+                new Category{CategoryId=1, CategoryName = "Backend Kursu"},
+                new Category{CategoryId=2, CategoryName = "Frontend Kursu"},
+                new Category{CategoryId=3, CategoryName = "Mobil Geliştirme Kursu"}
+            };
+        }
         public void Add(Category entity)
         {
-            throw new NotImplementedException();
+            _categories.Add(entity);
+            Console.WriteLine($"{entity.CategoryName} belleğe eklendi.");
         }
 
         public void Delete(Category entity)
         {
-            throw new NotImplementedException();
+            Category categoryToDelete = null;
+            categoryToDelete = _categories.SingleOrDefault(c => c.CategoryId == entity.CategoryId);
+            _categories.Remove(categoryToDelete);
+            Console.WriteLine($"{categoryToDelete.CategoryName} kategorisi bellekten silindi.");
         }
 
         public Category Get(int id)
         {
-            throw new NotImplementedException();
+            return _categories.SingleOrDefault(c => c.CategoryId == id);
         }
 
         public List<Category> GetAll()
         {
-            throw new NotImplementedException();
+            return _categories;
         }
 
         public void Update(Category entity)
         {
-            throw new NotImplementedException();
+            Category categoryToUpdate = null;
+            categoryToUpdate = _categories.SingleOrDefault(c => c.CategoryId == entity.CategoryId);
+            categoryToUpdate.CategoryName = entity.CategoryName;
+            Console.WriteLine($"{entity.CategoryName} düzenlendi.");
         }
     }
 }
